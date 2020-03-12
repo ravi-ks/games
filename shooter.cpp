@@ -3,7 +3,10 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <sys/ioctl.h>
-
+#include <thread>
+#include <chrono>
+//#include <pthread.h>
+//#include <cstdlib>
 using namespace std;
 
 int window_height = 20,window_width = 20;
@@ -82,16 +85,20 @@ void shooter_navigation(){
 
 void star_navigation(){
 	star_y ++;	
+	this_thread::sleep_for(chrono::milliseconds(200));
 }
 
 int main(){
 	star_x = (rand() % (window_width - 1)) + 1;
 	setup();
+	thread thread1, thread2;
 	while(gameOver){
-		shooter_navigation();
-		star_navigation();
+		thread1 = thread(&shooter_navigation);
+		thread2 = thread(&star_navigation);
 		setup();
-		usleep(500000);
+		thread1.detach();		
+		thread2.join();
+		//usleep(500000);
 		system("clear");
 	}			
 }
