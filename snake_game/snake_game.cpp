@@ -18,7 +18,7 @@
     bool gameOver;
     char ch, buff;
     int score, speed;
-    int snake_x, snake_y, prey_x, prey_y; //snake_x is window_width and snake_y is window_height.
+    int snake_x, snake_y, prey_x, prey_y; .
     char dir;
     bool is_head;
     const int window_height=20, window_width=40;
@@ -28,7 +28,7 @@
       int x, y;
    }snake[window_width*window_height];
    
-   
+   //custom kbhit function.
    int _kbhit() {
     static const int STDIN = 0;
     static bool initialized = false;
@@ -48,6 +48,7 @@
     return bytesWaiting;
   }
    
+   //custom getch function.
    int _getch(void)
    {
     struct termios oldattr, newattr;
@@ -91,7 +92,6 @@
         int k = 0;
         for(int i = 0; i < window_height; i++){
             for(int j = 0;j < window_width + 2; j++){
-                //cout<< is_snake_pos(i, 'y') << " " <<is_snake_pos(j, 'x')<<endl;
                 if(j == 0 || j == window_width + 1)
                     cout<<"#";
                 else if(is_snake_pos(i,j,0))
@@ -198,22 +198,22 @@
         
     void welcome_script(){
         system("clear");
-    	system("figlet -c -k SNAKE");
-        usleep(1000000);
-        system("figlet -c -k --O GAME");
-        usleep(3000000);
+    	system("figlet -c -k SNAKE");//comment_if_windows
+        usleep(1000000);//comment_if_windows
+        system("figlet -c -k --O GAME");//comment_if_windows
+        usleep(3000000);//comment_if_windows
         cout << "Name: ";
         cin >> name;
         system("clear");
-                system("figlet -c -k     3");
-                usleep(1000000);
-                system("clear");
-                system("figlet -c -k     2");
-                usleep(1000000);
-                system("clear");
-                system("figlet -c -k     1");
-                usleep(1000000);
-                system("clear");
+                system("figlet -c -k     3")//comment_if_windows;
+                usleep(1000000);//comment_if_windows
+                system("clear");//comment_if_windows
+                system("figlet -c -k     2");//comment_if_windows
+                usleep(1000000);//comment_if_windows
+                system("clear");//comment_if_windows
+                system("figlet -c -k     1");//comment_if_windows
+                usleep(1000000);//comment_if_windows
+                system("clear");//comment_if_windows
     }
     
     void play_music(){
@@ -222,7 +222,7 @@
     }
 
     int main(){
-        thread thread1(play_music);
+        thread thread1(play_music);//comment_if_windows
     	auto start_time = chrono::system_clock::now();
     	ofstream file_out("snake_game_logs.txt", ios::app);
         welcome_script();
@@ -239,8 +239,8 @@
             time_t _end_time_ = chrono::system_clock::to_time_t(end_time);
             file_out <<name << " " << score << " " << ctime(&_end_time_) << "\n";
             
-            cout << "\nPress ctrl+z to exit." << endl;
-            thread1.join();
+            cout << "\nPress ctrl+z to exit." << endl;//comment_if_windows
+            thread1.join();//comment_if_windows
             
             return 0;
         }
