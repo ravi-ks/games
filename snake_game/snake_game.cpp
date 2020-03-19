@@ -18,7 +18,7 @@
     bool gameOver;
     char ch, buff;
     int score, speed;
-    int snake_x, snake_y, prey_x, prey_y; .
+    int prey_x, prey_y; 
     char dir;
     bool is_head;
     const int window_height=20, window_width=40;
@@ -200,12 +200,12 @@
         system("clear");
     	system("figlet -c -k SNAKE");//comment_if_windows
         usleep(1000000);//comment_if_windows
-        system("figlet -c -k --O GAME");//comment_if_windows
+        system("figlet -c -k GAME");//comment_if_windows
         usleep(3000000);//comment_if_windows
         cout << "Name: ";
         cin >> name;
         system("clear");
-                system("figlet -c -k     3")//comment_if_windows;
+                system("figlet -c -k     3");//comment_if_windows;
                 usleep(1000000);//comment_if_windows
                 system("clear");//comment_if_windows
                 system("figlet -c -k     2");//comment_if_windows
