@@ -1,0 +1,14 @@
+Instructions to run this game:
+        1. Download the "snake_game" file as whole, failing to download any of the 3 sub-files will result in "file not found" error.
+        2. After downloading, change the directory in the terminal to "snake_game" file-directory.
+                Ex: user_name@machine_name: ~/Downloads/snake_game$  (just an example!).
+        3. Enter "ls" to the command line and ensure all three files are there.
+        4. Driver code     : snake_game.cpp
+           Background music: snake_game_background.wav
+           User logs       : Stores user info, FORMAT: NAME, SCORE, TIME STAMP
+           To compile      : g++ -std=c++11 -pthread snake_game.cpp -o snake_game
+           To execute      : ./snake_game
+        5. Portability     : many plugins used in the source code is solely for machines running on Linux-based distributions, however 
+                             commenting out the lines which has "//comment_if_windows" in it would make the code run on windows, but compromises many features (say no to windows!)
+                             for windows, replace every system("clear"); with system("cls");
+ 
