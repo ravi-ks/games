@@ -11,5 +11,7 @@ Instructions to run this game:
         5. Portability     : many plugins used in the source code is solely for machines running on Linux-based distributions, however 
                              commenting out the lines which has "//comment_if_windows" in it would make the code run on windows, but compromises many features (say no to windows!)
                              for windows, replace every system("clear"); with system("cls");
-                             
+        6. For linux, download fidget package,
+               command line : $ sudo apt-get install figlet
+        
  
