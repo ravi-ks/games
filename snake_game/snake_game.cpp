@@ -218,7 +218,7 @@
     
     void play_music(){
         while(1)
-        system("paplay p55a4-m1l4x.wav");//background music - wav file. Uploaded at ravi-ks/games/p55a4-m1l4x.wav, download before use.
+        system("paplay snake_game_background.wav");//background music - wav file. Uploaded at ravi-ks/games/p55a4-m1l4x.wav, download before use.
     }
 
     int main(){
