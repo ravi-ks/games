@@ -2,48 +2,32 @@
     
     #include <bits/stdc++.h>
     #include <stdio.h>
-    //#include </home/ravi_kumar/Downloads/conio.h>
-    //#include <ncurses.h>
     #include <unistd.h>
     #include <termios.h>
     #include <sys/select.h>
     #include <stropts.h>
     #include <sys/ioctl.h>
-    //#include <thread>
     #include <fstream>
     #include <chrono>
     #include <ctime>  
+    #include <thread>
     using namespace std;
     
     char undefined_move;
-    
     string name;
-    
     bool gameOver;
-
     char ch, buff;
-    
     int score, speed;
-
     int snake_x, snake_y, prey_x, prey_y; //snake_x is window_width and snake_y is window_height.
-    
-   /* namespace dir_namespace{
-        enum direction {stop=0,up, down, left, right};
-    }
-    
-    ::dir_namespace::direction dir = ::dir_namespace::direction::stop ; //:: - global namespace
-*/
     char dir;
     bool is_head;
     const int window_height=20, window_width=40;
+    int snake_len = 1;
    
    struct snake_structure{
       int x, y;
-      //, prev_dir;
-      //int change_in_dir;//did this node change its direction.
    }snake[window_width*window_height];
    
-   int snake_len = 1;
    
    int _kbhit() {
     static const int STDIN = 0;
@@ -62,7 +46,7 @@
     int bytesWaiting;
     ioctl(STDIN, FIONREAD, &bytesWaiting);
     return bytesWaiting;
-}
+  }
    
    int _getch(void)
    {
@@ -84,7 +68,6 @@
         prey_y = (rand() % (window_height - 1)) + 1;
         score = 0;
         speed = 500000;
-        //prey_x=prey_y=0;
         gameOver = false;
     }
     
@@ -99,7 +82,6 @@
     }
     
     void architecture(){
-        //architecture.
         int flag;
         system("clear");
         for(int i = 0; i < window_width + 2; i++)
@@ -119,12 +101,6 @@
                 	}
                 	else
                 	cout << "o";
-               /* for(int l = 0; l < snake_len;l++)
-                if(snake[l].y == i && snake[l].x == j){
-                //(is_snake_pos(i, 'y') && is_snake_pos(j, 'x')){
-                    cout<<"s";
-                    k++;
-                }*/
                 else if(i == prey_y && j == prey_x)
                     cout<<"*";
                 else
@@ -140,7 +116,6 @@
             cout<<"#";
         
         cout<<"\n";
-        //ending architecture.
         cout<<"score ~"<<score<<endl;
         
         
@@ -166,14 +141,11 @@
     void input(){
            if(_kbhit()){
             ch=_getch();
-            //snake[0].change_in_dir = 1;
             if((ch != 'w' && ch != 'a' && ch != 's' && ch != 'd')||(ch == undefined_move))
             ch = buff;
             }
            else{
             ch = buff;
-            //snake[0].prev_dir = snake[0].dir;
-            //snake[0].change_in_dir = 0;
            }
            
            for(int i = snake_len - 1; i >= 1; i--){
@@ -182,8 +154,8 @@
            }
            
             switch(ch){
-                case 'w': snake[0].y--;
-                          dir = 'u';//up
+                case 'w': snake[0].y--;//up
+                          dir = 'u';
                           undefined_move = 's';
                           break;
                 case 'a': snake[0].x--;//left
@@ -206,35 +178,15 @@
            if(is_snake_pos(snake[0].y, snake[0].x, 1))
            gameOver = true;
            
-           /*if(snake[i-1].change_in_dir == 1)
-                snake[i].dir = snake[i-1].prev_dir;
-           else
-                snake[i].dir = snake[i-1].dir;
-                switch(snake[i].dir){
-                        case('u'):snake[i].y--;
-                                  break;
-                        case('d'):snake[i].y++;
-                                  break;
-                        case('l'):snake[i].x--;
-                                  break;
-                        case('r'):snake[i].x++;
-                                  break;
-                        }
-           }
-*/
+
         if(snake[0].x < 1 || snake[0].y < 0 || snake[0].x > window_width || snake[0].y > window_height - 1)
          gameOver = true;
         if(snake[0].y == prey_y && snake[0].x == prey_x){
          score += 10;
          snake_len++;
          set_snake_dir(snake_len - 1);
-         //snake[snake_len-1].dir = snake[snake_len-2].dir;
          prey_x = (rand() % (window_width - 1 + 1)) + 1;
          prey_y = (rand() % (window_height - 1)) + 1;
-         //if(score == 60){
-         //cout << prey_x << " " << prey_y << endl;
-         //usleep(1000000);
-         //}
          if(speed != 100000)
          speed -= 50000;
         }
@@ -245,10 +197,10 @@
         }
         
     void welcome_script(){
-
+        system("clear");
     	system("figlet -c -k SNAKE");
         usleep(1000000);
-        system("figlet -c -k     GAME");
+        system("figlet -c -k --O GAME");
         usleep(3000000);
         cout << "Name: ";
         cin >> name;
@@ -263,10 +215,16 @@
                 usleep(1000000);
                 system("clear");
     }
+    
+    void play_music(){
+        while(1)
+        system("paplay p55a4-m1l4x.wav");//background music - wav file. Uploaded at ravi-ks/games/p55a4-m1l4x.wav, download before use.
+    }
+
     int main(){
+        thread thread1(play_music);
     	auto start_time = chrono::system_clock::now();
     	ofstream file_out("snake_game_logs.txt", ios::app);
-        //thread thread1(music);
         welcome_script();
         setup();
         architecture();
@@ -275,14 +233,19 @@
             architecture();
             usleep(speed);
             }
-            cout<<"Game Over!!!, " << name << endl;
+            cout<<"Game Over!!!, " << name << "." << endl;
+            
             auto end_time = chrono::system_clock::now();
             time_t _end_time_ = chrono::system_clock::to_time_t(end_time);
             file_out <<name << " " << score << " " << ctime(&_end_time_) << "\n";
-            //char ctrl_z = '^Z';
-            //system("^Z");
+            
+            cout << "\nPress ctrl+z to exit." << endl;
+            thread1.join();
+            
             return 0;
         }
+    
+    
     
 
     
