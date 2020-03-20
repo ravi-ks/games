@@ -1,4 +1,4 @@
-    //author - ravi
+//author - ravi
     
     #include <bits/stdc++.h>
     #include <stdio.h>
@@ -202,7 +202,7 @@
         usleep(1000000);//comment_if_windows
         system("figlet -c -k GAME");//comment_if_windows
         usleep(3000000);//comment_if_windows
-        cout << "Name: ";
+        cout << "Snake Navigation: \n a- left, d- right, s- down, w- up.\nName: ";
         cin >> name;
         system("clear");
                 system("figlet -c -k     3");//comment_if_windows;
@@ -244,8 +244,3 @@
             
             return 0;
         }
-    
-    
-    
-
-    
