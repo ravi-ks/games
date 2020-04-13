@@ -7,7 +7,8 @@ Instructions to run this game:
            Background music: game_background_halo.wav
            User logs       : Stores user info, FORMAT: NAME, SCORE.
            To compile      : g++ -std=c++11 -pthread shooter.cpp -o shooter
-           To execute      : ./shooter
+           To execute      : ./shooter window_height window_width
+                             (Ex. ./shooter 20 20)
         5. Portability     : many plugins used in the source code is solely for machines running on Linux-based distributions.
         6. For linux, download fidget package,
                command line : $ sudo apt-get install figlet
