@@ -238,7 +238,8 @@
             auto end_time = chrono::system_clock::now();
             time_t _end_time_ = chrono::system_clock::to_time_t(end_time);
             file_out <<name << " " << score << " " << ctime(&_end_time_) << "\n";
-            
+            file_out.close();
+        
             cout << "\nPress ctrl+z to exit." << endl;//comment_if_windows
             thread1.join();//comment_if_windows
             
