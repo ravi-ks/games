@@ -182,7 +182,7 @@ void star_navigation(){
 
 void play_music(){
 	while(1)
-	system("paplay game_background_halo.wav");
+	system("paplay game-background-halo.wav");
 }
 
 void timer(){
